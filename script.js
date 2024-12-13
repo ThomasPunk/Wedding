@@ -1,5 +1,5 @@
 let currentIndex = 1; // Indeks container aktif dimulai dari 1
-const totalContainers = 5; // Total container
+const totalContainers = 6; // Total container
 
 const showContainer = (nextIndex, direction) => {
   const currentContainer = document.getElementById(`container${currentIndex}`);
@@ -24,16 +24,19 @@ const showContainer = (nextIndex, direction) => {
   currentIndex = nextIndex;
 };
 
-document.getElementById("next").addEventListener("click", () => {
-  if (currentIndex < totalContainers) {
-    const nextIndex = currentIndex + 1;
-    showContainer(nextIndex, "next");
-  }
-});
+const buttons = [
+  { id: "jahat", container: 6, value: "jahat" },
+  { id: "baik", container: 2, value: "baik" },
+  { id: "tidak", container: 6, value: "tidak" },
+  { id: "kenal", container: 3, value: "kenal" },
+  { id: "hadir", container: 4, value: "hadir" },
+  { id: "absen", container: 6, value: "absen" },
+  { id: "done", container: 5, value: "done" },
+  { id: "kembali", container: 1, value: "kembali" }
+];
 
-document.getElementById("back").addEventListener("click", () => {
-  if (currentIndex > 1) {
-    const nextIndex = currentIndex - 1;
-    showContainer(nextIndex, "back");
-  }
+buttons.forEach(button => {
+  document.getElementById(button.id).addEventListener("click", () => {
+    showContainer(button.container, button.value);
+  });
 });

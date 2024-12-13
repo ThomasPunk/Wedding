@@ -7,40 +7,75 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!--<header>
+ <!-- <header>
     <h1>Selamat Datang di Undangan</h1>
-  </header> -->
+  </header>-->
 
   <main>
     <div id="container-wrapper">
       <div id="container1" class="container active">
         <h1>Selamat Datang</h1>
-        <p>Halo! Ini adalah undangan pernikahan kami.</p>
+        <p>Halo! Ini adalah undangan pernikahan kami <br> izinkan aku menanyakan sesuatu</p>
+        <h6>Apakah kamu Orang Baik?</h6>
+        <div id="navigation1">
+          <button id="jahat">Aku Jahat</button>
+          <button id="baik">Tentu!, Aku Baik</button>
+        </div>
       </div>
+
       <div id="container2" class="container">
         <h1>Pengantin</h1>
-        <p>Perkenalkan pasangan mempelai.</p>
+        <p>Perkenalkan pasangan mempelai. <br>sekarang kita masuk ke pertanyaan ke 2</p>
+        <h6>Apakah kamu mengenal kedua mempelai?</h6>
+        <div id="navigation2">
+          <button id="tidak">Tidak, aku tidak mengenal mereka</button>
+          <button id="kenal">Tentu!, mereka kenalanku</button>
+        </div>
       </div>
+
       <div id="container3" class="container">
         <h1>Waktu & Tempat</h1>
         <p>Berikut detail acara:</p>
+        <div id="navigation3">
+          <button id="hadir">Saya dapat hadir</button>
+          <button id="absen">Saya tidak dapat hadir</button>
+        </div>
       </div>
+
       <div id="container4" class="container">
         <h1>RSVP</h1>
         <p>Harap konfirmasi kehadiran Anda.</p>
+        <div id="navigation4">
+          <button id="done">Done</button>
+        </div>
       </div>
+
       <div id="container5" class="container">
         <h1>Terima Kasih</h1>
         <p>Kami menantikan kehadiran Anda!</p>
       </div>
+
+      <div id="container6" class="container">
+        <h1>GAGAL</h1>
+        <p>Anda tidak kami undang..!!</p>
+        <div id="navigation6">
+          <button id="kembali">Coba Kembali</button>
+        </div>
+      </div>
+
     </div>
-    <!-- Tombol Navigasi -->
-    <div id="navigation">
-      <button id="back">Back</button>
-      <button id="next">Next</button>
-    </div>
+
+   <div id="card">
+    <div class="layer"></div>  
+    <video src="02.mp4" autoplay muted loop></video>
+
+   </div>
+    
+    
   </main>
 
   <script src="script.js"></script>
 </body>
 </html>
+
+
