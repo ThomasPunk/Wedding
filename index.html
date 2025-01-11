@@ -1,81 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan</title>
-  <link rel="stylesheet" href="style.css">
+  <title>The Wedding Of Hilwa & Arief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+CO+Guides&family=Satisfy&display=swap" rel="stylesheet">
+  <style>
+
+:root{
+  /* atur variable tinggi dan lebar element*/
+  --man-height: calc(var(--window-height) * 0.2);
+  --man-width: calc(var(--man-height) * 2024/2694);
+  --woman-height: calc(var(--window-height) * 0.2);
+  --woman-width: calc(var(--woman-height) * 585/860);
+  --pantai-heigh: calc(var(--window-height) * 1);
+  --pantai-width: calc(var(--pantai-heigh) * 1164/655);
+  
+
+  /* menentukan Variable tengah halaman */
+  --mid-height: calc(var(--window-height)*0.5);
+  --mid-width: calc(var(--window-width)*.5);
+
+  /* Buat variable x dan y untuk meletakkan di tengah */
+  --xman-center: calc((var(--window-width) - var(--man-width))*0.5);
+  --yman-center: calc((var(--window-height) - var(--man-height))*0.5);
+  --xwoman-center: calc((var(--window-width) - var(--woman-width))*.5);
+  --ywoman-center: calc((var(--window-height) - var(--woman-height))*0.5);
+  --xpantai-center: calc((var(--window-width) - var(--pantai-width))*0.5);
+  --ypantai-center: calc((var(--window-height) - var(--pantai-heigh))*0.5);
+  --xtext-coord: calc(var(--window-width)*.2);
+  --ytext-coord: calc(var(--window-height)*.4);
+}
+
+body{
+  font-family:'Satisfy', Verdana, Geneva, Tahoma, sans-serif ;    
+  background-color: rgb(245, 245, 255);
+  min-height:100% ;
+  width: 100%;
+  margin: 0px;
+  overflow: hidden;
+}
+
+div{
+  position: fixed;
+  transition: transform 1.4s linear, perspective 3s ;
+  height: var(--window-height);
+  width: var(--window-width);
+  perspective-origin:  var(--mid-width) var(--mid-height);
+}
+
+h1{
+  position: fixed;
+  margin: 0px;
+  font-size: 5px;
+  transition: width 1.4s linear 1.4s;
+  width: 0px;
+  height: 6px;
+  overflow: hidden;
+  transform: translate3d(var(--xtext-coord),var(--ytext-coord), 5px)
+  
+}
+
+#man{
+  height: var(--man-height);
+  position: fixed;
+  transform: translate3d(calc(var(--xman-center) - 20px), calc(var(--yman-center) + 20px) , 500px);
+  }
+
+#woman{
+  height: var(--woman-height);
+  position: fixed;
+  transform: translate3d(calc(var(--xwoman-center) + 40px), calc(var(--ywoman-center) + 225px), 500px );
+}
+
+#background{
+  height: calc(var(--window-height)*1);
+  position: absolute;
+  z-index: -1;
+  transform: translate3d(var(--xpantai-center), var(--ypantai-center) , 5px);
+}
+
+
+/* mencoba membuat div perspektif */
+.act0 div{transform: translate(0,0); perspective: 1000px;}
+.act1 div{transform: translate(50%,0); perspective: 10px;} 
+.act1 h1{ width: 300px} 
+.act2 div{transform: translate(45% , 80%);
+perspective: 800px;}
+.act3 div{transform: translate(60%, 80%);
+perspective: 600px;}
+
+
+
+
+/* masih mencoba untuk bisa membuat animasi, 
+keknya langsung praktik dengan Click dan Tranlate 3d aja lah ya
+update Minggu 5 Januari 2025 jam 12.30
+- sudah bisa click dan double click,
+- animasi bisa dengan menu transisi, jadi untuk case ini kita pakai transisi saja,
+kita maindi transisi dan class di body aja
+
+update jam 13.57
+-ternyata aku gak bisa ngambil nilai lebar window di css, tahapa kurasa
+
+update jam 17.28
+-tah ngapain aja aku dari tadi huuu
+
+Update jam 18.10
+-dah bisaaaaaa, tinggal pande2 bagaimana cara membuat step by step nya. yang diubah cuman "*.6" itu itunya ajaaaa
+ 
+update jam 00.45
+-keknya perlu dibuat perubahan sedikit, untuk menentukan anchor point dulu dengan :root baru gaskan geser2 Pake px
+
+update tanggal 11 januari 2025 jam 18.04
+-yang di transform itu perpectivenya, bukan translate z nya
+*/
+
+  </style>
 </head>
+
 <body>
- <!-- <header>
-    <h1>Selamat Datang di Undangan</h1>
-  </header>-->
+  
+  <div>
+    <img src="man.png"  id="man">
+    <img src="woman.png"  id="woman">
+    <img src="pantai.png" id="background">
+    <h1 class="openingWord1"> The Wedding Of Hilwa & Arief </h1>
+  </div>
 
-  <main>
-    <div id="container-wrapper">
-      <div id="container1" class="container active">
-        <h1>Selamat Datang</h1>
-        <p>Halo! Ini adalah undangan pernikahan kami <br> izinkan aku menanyakan sesuatu</p>
-        <h6>Apakah kamu Orang Baik?</h6>
-        <div id="navigation1">
-          <button id="jahat">Aku Jahat</button>
-          <button id="baik">Tentu!, Aku Baik</button>
-        </div>
-      </div>
+  <script>
+  
+  let actNumber = 0;
+  let singleClickTimer; // Timer untuk mendeteksi klik tunggal
 
-      <div id="container2" class="container">
-        <h1>Pengantin</h1>
-        <p>Perkenalkan pasangan mempelai. <br>sekarang kita masuk ke pertanyaan ke 2</p>
-        <h6>Apakah kamu mengenal kedua mempelai?</h6>
-        <div id="navigation2">
-          <button id="tidak">Tidak, aku tidak mengenal mereka</button>
-          <button id="kenal">Tentu!, mereka kenalanku</button>
-        </div>
-      </div>
+  // Fungsi untuk memperbarui kelas
+  function act(actNumber) {
+    document.body.className = document.body.className.replace(/act\d+/g, '');
+    document.body.classList.add(`act${actNumber}`);
+    }
 
-      <div id="container3" class="container">
-        <h1>Waktu & Tempat</h1>
-        <p>Berikut detail acara:</p>
-        <div id="navigation3">
-          <button id="hadir">Saya dapat hadir</button>
-          <button id="absen">Saya tidak dapat hadir</button>
-        </div>
-      </div>
+  // Event untuk klik tunggal
+  document.addEventListener('click', () => {
+    clearTimeout(singleClickTimer); // Hentikan timer jika ada
+    singleClickTimer = setTimeout(() => {
+      actNumber += 1; // Tambah actNumber
+      act(actNumber); // Update kelas
+    }, 200); // Delay untuk memastikan bukan double click
+  });
 
-      <div id="container4" class="container">
-        <h1>RSVP</h1>
-        <p>Harap konfirmasi kehadiran Anda.</p>
-        <div id="navigation4">
-          <button id="done">Done</button>
-        </div>
-      </div>
+  // Event untuk double-click
+  document.addEventListener('dblclick', () => {
+    clearTimeout(singleClickTimer); // Hentikan timer yang jalan saat sigle click
+    if( actNumber <= 0){
+      actNumber=0;
+    }
+    else {
+    actNumber -= 1;
+    }
+   
+    // Kurangi actNumber
+    act(actNumber); // Update kelas
+  });
 
-      <div id="container5" class="container">
-        <h1>Terima Kasih</h1>
-        <p>Kami menantikan kehadiran Anda!</p>
-      </div>
+  // Inisialisasi awal
+  act(actNumber);
 
-      <div id="container6" class="container">
-        <h1>GAGAL</h1>
-        <p>Anda tidak kami undang..!!</p>
-        <div id="navigation6">
-          <button id="kembali">Coba Kembali</button>
-        </div>
-      </div>
+  // Mengambil lebar window dan mengaturnya ke variabel CSS
+  function updateWindowWidth() {
+      const windowWidth = window.innerWidth;
+      document.documentElement.style.setProperty('--window-width', `${windowWidth}px`);
+      const windowHeight = window.innerHeight;
+      document.documentElement.style.setProperty('--window-height', `${windowHeight}px`);
+      console.log('lebar :',windowWidth, 'tinggi:',windowHeight);
+    }
 
-    </div>
-
-   <div id="card">
-    <div class="layer"></div>  
-    <video src="02.mp4" autoplay muted loop></video>
-
-   </div>
+    // Memanggil fungsi setiap kali ukuran window berubah
+    window.addEventListener('resize', updateWindowWidth);
     
-    
-  </main>
+    // Panggil sekali pada awal
+    updateWindowWidth();
+</script>
 
-  <script src="script.js"></script>
+
+
 </body>
 </html>
-
-
