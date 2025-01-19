@@ -4,93 +4,177 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Wedding Of Hilwa & Arief</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playwrite+CO+Guides&family=Satisfy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+CO+Guides&family=Satisfy&display=swap" rel="stylesheet"> -->
   <style>
 
 :root{
   /* atur variable tinggi dan lebar element*/
-  --man-height: calc(var(--window-height) * 0.2);
+  --man-height: 20vh ;
   --man-width: calc(var(--man-height) * 2024/2694);
-  --woman-height: calc(var(--window-height) * 0.2);
+  --woman-height: 20vh ;
   --woman-width: calc(var(--woman-height) * 585/860);
-  --pantai-heigh: calc(var(--window-height) * 1);
+  --pantai-heigh: 100vh ;
   --pantai-width: calc(var(--pantai-heigh) * 1164/655);
   
 
   /* menentukan Variable tengah halaman */
-  --mid-height: calc(var(--window-height)*0.5);
-  --mid-width: calc(var(--window-width)*.5);
+  --mid-height: 50vh ;
+  --mid-width: 50vw;
 
   /* Buat variable x dan y untuk meletakkan di tengah */
-  --xman-center: calc((var(--window-width) - var(--man-width))*0.5);
-  --yman-center: calc((var(--window-height) - var(--man-height))*0.5);
-  --xwoman-center: calc((var(--window-width) - var(--woman-width))*.5);
-  --ywoman-center: calc((var(--window-height) - var(--woman-height))*0.5);
-  --xpantai-center: calc((var(--window-width) - var(--pantai-width))*0.5);
-  --ypantai-center: calc((var(--window-height) - var(--pantai-heigh))*0.5);
-  --xtext-coord: calc(var(--window-width)*.2);
-  --ytext-coord: calc(var(--window-height)*.4);
+  --xman-center: calc((100vw - var(--man-width))*0.5);
+  --yman-center: calc((100vh - var(--man-height))*0.5);
+  --xwoman-center: calc((100vw - var(--woman-width))*.5);
+  --ywoman-center: calc((100vh - var(--woman-height))*0.5);
+  --xpantai-center: calc((100vw - var(--pantai-width))*0.5);
+  --ypantai-center: calc((100vh - var(--pantai-heigh))*0.5);
+  --xtext-coord: -12vw;
+  --ytext-coord: 40vh;
 }
 
 body{
   font-family:'Satisfy', Verdana, Geneva, Tahoma, sans-serif ;    
   background-color: rgb(245, 245, 255);
-  min-height:100% ;
-  width: 100%;
+  min-height:100vh ;
+  width: 100vw;
   margin: 0px;
   overflow: hidden;
 }
 
-div{
-  position: fixed;
-  transition: transform 1.4s linear, perspective 3s ;
-  height: var(--window-height);
-  width: var(--window-width);
+.loadingPage.hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loadingPage{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left:0;
+  top:0;
+  z-index: 2;
+  background-color: pink;
+}
+
+.main {
+  opacity: 0;
+  visibility: hidden;
+  transition: 1s ease opacity;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  perspective: 300px;
+  left:0;
   perspective-origin:  var(--mid-width) var(--mid-height);
 }
 
-h1{
-  position: fixed;
-  margin: 0px;
-  font-size: 5px;
-  transition: width 1.4s linear 1.4s;
-  width: 0px;
-  height: 6px;
-  overflow: hidden;
-  transform: translate3d(var(--xtext-coord),var(--ytext-coord), 5px)
-  
+.main.visible{
+  opacity: 1;
+  visibility: visible;
 }
 
-#man{
+.loadingWord{
+  position: relative;
+  font-size: 1rem;
+  width: 5rem ;
+  left: 46%;
+  top: 50%;
+  animation: 2s ease alternate infinite loading;
+  overflow: hidden;
+}
+
+@keyframes loading {
+  to{
+    width:0px
+  }}
+
+.door{
+  position: absolute;
+  background-color: pink;
+  z-index: 1;
+}
+div.door {
+  width: 50vw;
+  height: 100vh;
+}
+
+.door#right{
+  transform-origin: right;
+  left: 50vw;
+}
+
+.door#left{
+  transform-origin: left;
+}
+
+h1.door , h2.door{
+  position: relative;
+  display: flex;
+  justify-self: center;
+  transform: translateY(42vh);
+  background-color: transparent;
+}
+
+h1.door{
+  font-size: 1.7rem;
+}
+h2.door{
+  font-size: 1.5rem;
+}
+
+#openingWord1{
+  position: absolute;
+  margin: 0px;
+  font-size: .5rem;
+  width: 0vw;
+  height: .6rem;
+  overflow: hidden;
+  transform: translate3d(var(--xtext-coord),var(--ytext-coord), 30px)
+  }
+
+.man{
   height: var(--man-height);
-  position: fixed;
-  transform: translate3d(calc(var(--xman-center) - 20px), calc(var(--yman-center) + 20px) , 500px);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  /* transform: translate3d(calc(var(--xman-center) - 20vw), calc(var(--yman-center) + 28vh) , 100px); */
   }
 
 #woman{
   height: var(--woman-height);
-  position: fixed;
-  transform: translate3d(calc(var(--xwoman-center) + 40px), calc(var(--ywoman-center) + 225px), 500px );
+  position: absolute;
+  transform: translate3d(calc(var(--xwoman-center) - 9vh), calc(var(--ywoman-center) + 27vh), 100px );
 }
 
-#background{
-  height: calc(var(--window-height)*1);
+
+#pantai{
+  height: 100vh;
   position: absolute;
   z-index: -1;
-  transform: translate3d(var(--xpantai-center), var(--ypantai-center) , 5px);
+  transform: translate3d(var(--xpantai-center), var(--ypantai-center) , 40px);
+}
+
+
+#background{
+  height: 2000px;
+  position: absolute;
+  left: 80vw;
+  top: 0;
+  z-index: -2;
+  transform: translate3d(-50vw,  -20vh , 0px);
 }
 
 
 /* mencoba membuat div perspektif */
-.act0 div{transform: translate(0,0); perspective: 1000px;}
-.act1 div{transform: translate(50%,0); perspective: 10px;} 
-.act1 h1{ width: 300px} 
-.act2 div{transform: translate(45% , 80%);
-perspective: 800px;}
+/* .act0 div{transform: translate(120vw , 0);perspective: 1000px;}
+.act1 div{transform: translate(170vw , 0); perspective: 80px;} 
+.act1 h1{ width: 300px;transition: width 1.4s linear 3s;} 
+.act2 div{transform: translate(30vw, -10vh);perspective: 500px;}
+.act2 h1{ width: 300px; transition: opacity 1.4s linear ;opacity: 0 }
 .act3 div{transform: translate(60%, 80%);
-perspective: 600px;}
+perspective: 600px;} */
 
 
 
@@ -116,71 +200,133 @@ update jam 00.45
 
 update tanggal 11 januari 2025 jam 18.04
 -yang di transform itu perpectivenya, bukan translate z nya
+
+update 12 jan 2025 16.08
+-kita gaperlu pake --window-width karena kita bisa menggantikannya dengan 100vw, satuannya vw yaitu viewport windth
+
+update jam 23.51
+-udah diubah semua --window-width menjadi vw dan juga vh
+
+update 13 jan 2025 0051
+-susah kali pun ngaturkan posisinya ini, tdr aja lah aku
+
+update 14 jan 2025 23:38
+-hilwa ngasi saran untuk ngubah click menjadi scroll, susah sih, tapi yauda la kita coba aja, toh nambah2 pintar jugak uahahahaha
+
+update jam 00:10
+-Scroll sudah jalan ya, tinggal gaskan masukkan Translate3D
 */
 
   </style>
 </head>
 
 <body>
+  <div class="loadingPage">
+    <h1 class="loadingWord"> Loading... </h1>
+  </div>
   
-  <div>
-    <img src="man.png"  id="man">
+  <div class="main">
+    <div class="door" id="left"></div>
+    <div class="door" id="right"></div>
+    <h1 class="door"> Undangan Pernikahan Hilwa & Arief</h1>
+    <h2 class="door"> Kepada Yth: Fulan</h2>
+    <img src="man.png"  class="man">
     <img src="woman.png"  id="woman">
-    <img src="pantai.png" id="background">
+    <img src="pantai.png" id="pantai">
+    <img src="pantai2.png" id="background">
     <h1 class="openingWord1"> The Wedding Of Hilwa & Arief </h1>
   </div>
-
-  <script>
+ 
   
-  let actNumber = 0;
-  let singleClickTimer; // Timer untuk mendeteksi klik tunggal
+  <script>
 
-  // Fungsi untuk memperbarui kelas
-  function act(actNumber) {
-    document.body.className = document.body.className.replace(/act\d+/g, '');
-    document.body.classList.add(`act${actNumber}`);
+  //-----------Bagian animasi-------------
+  const doorLeft = document.getElementById("left");
+  const doorRight = document.getElementById("right");
+  let doors = document.querySelectorAll('h1.door, h2.door')
+  const man = document.querySelector('.man');
+  let scrollPosition = 0; // Posisi scroll virtual
+  let targetScrollPosition = 0; // Posisi scroll tujuan
+  let startY = 0; // Posisi awal sentuhan pada layar
+  
+
+  // Fungsi untuk memperbarui animasi
+  function updateAnimation() {
+    // Lerp untuk membuat pergerakan smooth
+    scrollPosition += (targetScrollPosition - scrollPosition) * 0.1;
+
+    // Log posisi scroll ke console
+    console.log(scrollPosition);
+
+    if(scrollPosition < 21){
+      
+      doorLeft.style.transform = `translateX(-${scrollPosition}vw)`;
+      doorRight.style.transform = `translateX(${scrollPosition}vw)`;
+      if (Math.abs(targetScrollPosition - scrollPosition) > 0.1) {
+      requestAnimationFrame(updateAnimation);
+      }
+      else if(scrollPosition < 0.1){
+        scrollPosition = 0;
+      }
     }
-
-  // Event untuk klik tunggal
-  document.addEventListener('click', () => {
-    clearTimeout(singleClickTimer); // Hentikan timer jika ada
-    singleClickTimer = setTimeout(() => {
-      actNumber += 1; // Tambah actNumber
-      act(actNumber); // Update kelas
-    }, 200); // Delay untuk memastikan bukan double click
-  });
-
-  // Event untuk double-click
-  document.addEventListener('dblclick', () => {
-    clearTimeout(singleClickTimer); // Hentikan timer yang jalan saat sigle click
-    if( actNumber <= 0){
-      actNumber=0;
+    else if(scrollPosition < 51){
+      
+      doorLeft.style.transform = `translateX(-${scrollPosition}vw)`;
+      doorRight.style.transform = `translateX(${scrollPosition}vw)`;
+      doors.forEach(door => {
+        door.style.opacity = (50-Math.round(scrollPosition))/20;
+      });
+      if (Math.abs(targetScrollPosition - scrollPosition) > 0.1) {
+      requestAnimationFrame(updateAnimation);
+      }
+      
     }
-    else {
-    actNumber -= 1;
-    }
-   
-    // Kurangi actNumber
-    act(actNumber); // Update kelas
-  });
+    else if (scrollPosition< 80){}
+    else if (scrollPosition < 500){
+      // Terapkan animasi pada elemen
+      let x = scrollPosition-80;
+      
+      man.style.transform = `translate3D(${x}px, ${x}px , ${x}px)`;
 
-  // Inisialisasi awal
-  act(actNumber);
-
-  // Mengambil lebar window dan mengaturnya ke variabel CSS
-  function updateWindowWidth() {
-      const windowWidth = window.innerWidth;
-      document.documentElement.style.setProperty('--window-width', `${windowWidth}px`);
-      const windowHeight = window.innerHeight;
-      document.documentElement.style.setProperty('--window-height', `${windowHeight}px`);
-      console.log('lebar :',windowWidth, 'tinggi:',windowHeight);
-    }
-
-    // Memanggil fungsi setiap kali ukuran window berubah
-    window.addEventListener('resize', updateWindowWidth);
+      // Jika animasi belum selesai, panggil lagi `updateAnimation`
+      if (Math.abs(targetScrollPosition - scrollPosition) > 0.1) {
+      requestAnimationFrame(updateAnimation);
+      }
     
-    // Panggil sekali pada awal
-    updateWindowWidth();
+    }
+    }
+
+    // Event untuk desktop (mouse scroll)
+    window.addEventListener('wheel', (event) => {
+      targetScrollPosition += event.deltaY/20; // Tambah/mengurangi posisi tujuan
+      targetScrollPosition = Math.max(0, targetScrollPosition); // Hindari nilai negatif
+      requestAnimationFrame(updateAnimation); // Mulai animasi
+    });
+
+    // Event untuk perangkat layar sentuh (touchmove)
+    document.addEventListener('touchstart', (event) => {
+      startY = event.touches[0].clientY; // Catat posisi sentuhan awal
+    });
+
+    document.addEventListener('touchmove', (event) => {
+      const currentY = event.touches[0].clientY; // Posisi sentuhan saat ini
+      const deltaY = startY - currentY; // Hitung perubahan posisi
+      targetScrollPosition += deltaY/20; // Tambah ke posisi tujuan
+      targetScrollPosition = Math.max(0, targetScrollPosition); // Hindari nilai negatif
+      startY = currentY; // Update posisi sentuhan
+      requestAnimationFrame(updateAnimation); // Mulai animasi
+    });   
+
+    //-------------- Bagian Loading Page-------------
+
+    const loadingPage = document.querySelector('.loadingPage')
+    const main = document.querySelector('.main')
+
+    window.addEventListener('load', () => {
+      loadingPage.classList.add('hidden')
+      main.classList.add('visible')
+      scrollPosition = 0;
+    })
 </script>
 
 
