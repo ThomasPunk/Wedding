@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>The Wedding Of Hilwa & Arief</title>
   <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,11 +43,14 @@ body{
   overflow: hidden;
 }
 
+/* menyembunyikan loading Page saat selesai */
 .loadingPage.hidden{
   opacity: 0;
   visibility: hidden;
 }
 
+
+/* pengaturan loadig Page */
 .loadingPage{
   height: 100vh;
   width: 100vw;
@@ -58,6 +61,7 @@ body{
   background-color: pink;
 }
 
+/* pengaturan tampilan awal */
 .main {
   opacity: 0;
   visibility: hidden;
@@ -65,16 +69,18 @@ body{
   height: 100vh;
   width: 100vw;
   position: absolute;
-  perspective: 300px;
+  perspective: 500px;
   left:0;
   perspective-origin:  var(--mid-width) var(--mid-height);
 }
+
 
 .main.visible{
   opacity: 1;
   visibility: visible;
 }
 
+/* Pengaturan Loading Word */
 .loadingWord{
   position: relative;
   font-size: 1rem;
@@ -90,33 +96,33 @@ body{
     width:0px
   }}
 
+/* Pengaturan display door di awal */
 .door{
   position: absolute;
   background-color: pink;
   z-index: 1;
+  opacity: 0;
 }
 div.door {
   width: 50vw;
   height: 100vh;
+  transition: 1.5s transform, 1.3s 0.2s opacity ;
 }
-
 .door#right{
   transform-origin: right;
   left: 50vw;
 }
-
 .door#left{
   transform-origin: left;
 }
-
 h1.door , h2.door{
   position: relative;
   display: flex;
   justify-self: center;
   transform: translateY(42vh);
   background-color: transparent;
+  transition: 1.3s .2s opacity, 1.3s .1s scale;
 }
-
 h1.door{
   font-size: 1.7rem;
 }
@@ -124,47 +130,71 @@ h2.door{
   font-size: 1.5rem;
 }
 
-#openingWord1{
+
+/* Pengaturan awal semua Item */
+.openingWord1{
   position: absolute;
   margin: 0px;
   font-size: .5rem;
-  width: 0vw;
+  width: 20vw;
   height: .6rem;
   overflow: hidden;
-  transform: translate3d(var(--xtext-coord),var(--ytext-coord), 30px)
+  transform: translate3d(0vw, 0vh, 1px)
   }
 
 .man{
   height: var(--man-height);
-  position: relative;
-  top: 50%;
-  left: 50%;
-  /* transform: translate3d(calc(var(--xman-center) - 20vw), calc(var(--yman-center) + 28vh) , 100px); */
+  position: absolute;
+  transform: translate3d(calc(var(--xman-center) - 20vw), calc(var(--yman-center) + 28vh) , 1px); 
   }
 
 #woman{
   height: var(--woman-height);
   position: absolute;
-  transform: translate3d(calc(var(--xwoman-center) - 9vh), calc(var(--ywoman-center) + 27vh), 100px );
+  transform: translate3d(calc(var(--xwoman-center) - 9vh), calc(var(--ywoman-center) + 27vh), 1px );
 }
-
 
 #pantai{
   height: 100vh;
   position: absolute;
   z-index: -1;
-  transform: translate3d(var(--xpantai-center), var(--ypantai-center) , 40px);
+  transform: translate3d(var(--xpantai-center), var(--ypantai-center) , 1px);
 }
-
 
 #background{
-  height: 2000px;
+  width: 100vw;
   position: absolute;
-  left: 80vw;
-  top: 0;
   z-index: -2;
-  transform: translate3d(-50vw,  -20vh , 0px);
+  transform: translate3d(0vw,  -30vh , 0px);
 }
+
+/* -----okee scene 1-------- */
+.scene0 .door{opacity: 1}
+.scene1 div.door#left{
+  transform: rotateY(-100deg);
+  opacity: 0;
+}
+.scene1 div.door#right{
+  transform: rotateY(100deg);
+  opacity: 0;
+}
+.scene1 h1.door, .scene1 h2.door{
+  opacity : 0;
+  scale : 1.1;
+}
+
+
+
+/* -----scene 2-------- */
+
+
+
+
+
+
+
+
+
 
 
 /* mencoba membuat div perspektif */
@@ -175,10 +205,6 @@ h2.door{
 .act2 h1{ width: 300px; transition: opacity 1.4s linear ;opacity: 0 }
 .act3 div{transform: translate(60%, 80%);
 perspective: 600px;} */
-
-
-
-
 /* masih mencoba untuk bisa membuat animasi, 
 keknya langsung praktik dengan Click dan Tranlate 3d aja lah ya
 update Minggu 5 Januari 2025 jam 12.30
@@ -215,6 +241,10 @@ update 14 jan 2025 23:38
 
 update jam 00:10
 -Scroll sudah jalan ya, tinggal gaskan masukkan Translate3D
+
+upadate 26 jan 2025 15.59
+-kuganti scroll menjadi triger, gak menjadi patokan utama pergerakan animasi
+-tugas selanjutnya untuk membuat animasi dengan CSS biar lebih mudah 
 */
 
   </style>
@@ -225,7 +255,7 @@ update jam 00:10
     <h1 class="loadingWord"> Loading... </h1>
   </div>
   
-  <div class="main">
+  <div class="main scene0" >
     <div class="door" id="left"></div>
     <div class="door" id="right"></div>
     <h1 class="door"> Undangan Pernikahan Hilwa & Arief</h1>
@@ -240,67 +270,43 @@ update jam 00:10
   
   <script>
 
-  //-----------Bagian animasi-------------
-  const doorLeft = document.getElementById("left");
-  const doorRight = document.getElementById("right");
-  let doors = document.querySelectorAll('h1.door, h2.door')
-  const man = document.querySelector('.man');
+  //-----------Bagian logika pindah scene-------------
   let scrollPosition = 0; // Posisi scroll virtual
+  let scrollDirrection = 0;
+  let sceneNumber = 0;
   let targetScrollPosition = 0; // Posisi scroll tujuan
   let startY = 0; // Posisi awal sentuhan pada layar
+  const main = document.querySelector('.main');
   
 
   // Fungsi untuk memperbarui animasi
   function updateAnimation() {
-    // Lerp untuk membuat pergerakan smooth
-    scrollPosition += (targetScrollPosition - scrollPosition) * 0.1;
-
-    // Log posisi scroll ke console
-    console.log(scrollPosition);
-
-    if(scrollPosition < 21){
-      
-      doorLeft.style.transform = `translateX(-${scrollPosition}vw)`;
-      doorRight.style.transform = `translateX(${scrollPosition}vw)`;
-      if (Math.abs(targetScrollPosition - scrollPosition) > 0.1) {
-      requestAnimationFrame(updateAnimation);
-      }
-      else if(scrollPosition < 0.1){
-        scrollPosition = 0;
-      }
-    }
-    else if(scrollPosition < 51){
-      
-      doorLeft.style.transform = `translateX(-${scrollPosition}vw)`;
-      doorRight.style.transform = `translateX(${scrollPosition}vw)`;
-      doors.forEach(door => {
-        door.style.opacity = (50-Math.round(scrollPosition))/20;
-      });
-      if (Math.abs(targetScrollPosition - scrollPosition) > 0.1) {
-      requestAnimationFrame(updateAnimation);
-      }
-      
-    }
-    else if (scrollPosition< 80){}
-    else if (scrollPosition < 500){
-      // Terapkan animasi pada elemen
-      let x = scrollPosition-80;
-      
-      man.style.transform = `translate3D(${x}px, ${x}px , ${x}px)`;
-
-      // Jika animasi belum selesai, panggil lagi `updateAnimation`
-      if (Math.abs(targetScrollPosition - scrollPosition) > 0.1) {
-      requestAnimationFrame(updateAnimation);
-      }
+    // untuk membuat perubahan nomor scene
+   
+    scrollDirrection = (targetScrollPosition - scrollPosition);
+    scrollPosition = targetScrollPosition;
     
+    if(scrollDirrection>=15){
+      sceneNumber+=1;
     }
+    else if(scrollDirrection<=-15){
+      sceneNumber-=1;
+      sceneNumber = Math.max(sceneNumber,0);
     }
+    console.log(targetScrollPosition, scrollPosition, scrollDirrection, sceneNumber);
+    // Log posisi scroll ke console
+      
+    main.className = main.className.replace(/scene\d+/g, '');
+    main.classList.add(`scene${sceneNumber}`);
+    
+  }
 
     // Event untuk desktop (mouse scroll)
     window.addEventListener('wheel', (event) => {
       targetScrollPosition += event.deltaY/20; // Tambah/mengurangi posisi tujuan
-      targetScrollPosition = Math.max(0, targetScrollPosition); // Hindari nilai negatif
-      requestAnimationFrame(updateAnimation); // Mulai animasi
+      //targetScrollPosition = Math.max(0, targetScrollPosition); // Hindari nilai negatif
+      setTimeout(()=>{updateAnimation();},200);
+       // Mulai animasi
     });
 
     // Event untuk perangkat layar sentuh (touchmove)
@@ -314,14 +320,13 @@ update jam 00:10
       targetScrollPosition += deltaY/20; // Tambah ke posisi tujuan
       targetScrollPosition = Math.max(0, targetScrollPosition); // Hindari nilai negatif
       startY = currentY; // Update posisi sentuhan
-      requestAnimationFrame(updateAnimation); // Mulai animasi
+      setTimeout(()=>{updateAnimation();},200); // Mulai animasi
     });   
 
     //-------------- Bagian Loading Page-------------
 
     const loadingPage = document.querySelector('.loadingPage')
-    const main = document.querySelector('.main')
-
+    
     window.addEventListener('load', () => {
       loadingPage.classList.add('hidden')
       main.classList.add('visible')
