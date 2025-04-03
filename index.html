@@ -49,7 +49,6 @@ body{
   visibility: hidden;
 }
 
-
 /* pengaturan loadig Page */
 .loadingPage{
   height: 100vh;
@@ -192,15 +191,21 @@ body{
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   background-color: rgb(77, 44, 29);
-  transform: translateZ(2px);
+  transform: translateZ(.3px);
  }
 
 .envelopeBack{
   position: absolute;
+  width: 70vw;
+  height: 190.45px;
+  transform: rotateY(180deg)translate3d(-1.5px, 5px, -.1px);
+}
+
+.envelopeBackSVG{
+  position: absolute;
   fill: rgb(77, 44, 29);
   stroke: black;
   stroke-width: 1px;
-  transform: rotateY(180deg);
   width: 70vw;
   height: 190.45px;
   max-width: 100%; /* Agar tidak melebihi lebar parent */
@@ -212,6 +217,27 @@ body{
   filter:drop-shadow( 0px 5px 15px rgba(0, 0, 0, 0.5));
   overflow: visible;
   background-color: transparent;
+}
+
+.envelopeBackUp{
+  position: absolute;
+  width: 70vw;
+  height: 190.45px;
+  transform-origin: 0px 5px;
+  transform: translate(0px,5px);
+}
+.scene2up .envelope{
+  transform: rotateY(180deg);
+  top:50vh ;
+}
+
+.scene2up .envelopeBackUp{
+  animation: openUp 1s ease-in forwards ;
+}
+
+@keyframes openUp {
+  from{transform: rotateX(0deg) translate3d(0px,5px,-.1px);}
+  to {transform: rotateX(-180deg) translate3d(0px,5px,-.5px);}
 }
 
 .envelopeFront h2{
@@ -344,20 +370,6 @@ img#img2{
 
 /* Pengaturan Scene2 */
 
-
-.scene2up .envelope{
-  transform: rotateY(180deg);
-  top:50vh ;
-}
-.scene2up #envelopeUp{
-  animation: openUp 1s ease-in-out forwards;
-  transform-origin: 0px -23px;
-}
-
-@keyframes openUp {
-  to {transform: rotateX(180deg);}
-}
-
 .boxLetter{
   position: absolute;
   transform: rotateY(180deg);
@@ -368,18 +380,32 @@ img#img2{
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   overflow: visible;
   background-color: rgb(255, 245, 224);
-  transform: translate3d(10vw, 5px, 1px);
+  transform: translate3d(10vw, 10px, .2px);
 }
 
 .scene2up .boxLetter{
-  animation: gotBigger 10s linear forwards 1s;
+  animation: gotBigger 2s linear forwards 1.2s;
 }
 @keyframes gotBigger {
-  0%{transform: translate3d(10vw, 5px, 1px);}
-  30%{transform: translate3d(10vw, -150px, 1px);}
+  0%{transform: translate3d(10vw, 5px, .2px);}
+  30%{transform: translate3d(10vw, -150px, .2px);}
   95%{transform: translate3d(10vw, -90px, -501px);}
   100%{transform: translate3d(10vw, -30px, -501px);visibility: hidden;}
 }
+
+.scene2up .textScene1{
+  animation: fadeOut 1.2s linear forwards;
+}
+
+.scene2up .envelopeBackSVG, .scene2up #img2{
+  will-change: opacity, visibility;
+  animation: fadeOut .2s linear forwards 2.8s;
+}
+
+
+
+
+
 /* Pengaturan Scene3 */
 
 
@@ -525,7 +551,7 @@ update 3 april 2025 14.34
     <div class="loadingBit2"></div>
   </div>
   
-  <div class="main scene2up" >
+  <div class="main scene0" >
     <div class="swipeUp">
       <div></div>
       <div></div>
@@ -538,23 +564,30 @@ update 3 april 2025 14.34
     <h2 class="textScene0"><span id="nama"></span></h2>
     <div class="envelope">
       <div class="envelopeFront">
-        <h2>Hilwa &<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arief</h2>
+        <h2>Hilwa &
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arief</h2>
         <img src="flower1.png" style="scale: 0.3">
       </div>
-      <svg class="envelopeBack" xmlns="http://www.w3.org/2000/svg" viewBox="-16 -18 220.42921 150.45351" >
-        <path
-          d="m 121.44578,48.06903 c -2.872,2.49622 -4.80727,5.89552 -5.48319,9.63511 l 2.1e-4,-0.0138 c 0.67599,3.73931 2.6095,7.13871 5.48259,9.6357 l -0.031,0.0223 63.82953,61.21181 0.0123,0.047 c 3.34641,3.6582 7.72089,6.22939 12.5519,7.378 l 6.73629,1.70561 2.1e-4,-160.00021 -6.73551,1.7061 v 0.0122 c -4.83161,1.14829 -9.20609,3.72039 -12.5536,7.37799 l -0.0479,0.0109 -63.82889,61.21122 0.0675,0.0601 z"
-          id="envelopeRight" />
-        <path
-          d="m 67.64378,48.06903 c 2.87161,2.49622 4.8073,5.89552 5.4828,9.63511 v -0.0138 c -0.6762,3.73931 -2.6095,7.13871 -5.4828,9.6357 l 0.0314,0.0223 -63.82999,61.21181 -0.012,0.047 c -3.34631,3.6582 -7.7209,6.22939 -12.5518,7.378 l -6.73618,1.70561 -3.6e-4,-160.00021 6.73552,1.7061 3.5e-4,0.0122 c 4.83161,1.14829 9.2057,3.72039 12.55321,7.37799 l 0.0481,0.0109 63.82911,61.21122 -0.0673,0.0601 z"
-          id="envelopeLeft" />
-        <path
-          d="m 202.3096,125.28944 c -1.2767,-6.26649 -4.13632,-8.1383 -5.44862,-9.5705 l -8.04478,-8.5252 -55.7597,-67.812 c -1.7847,-2.41938 -4.6199,-3.81741 -7.60691,-3.74699 H 63.57481 c -2.9863,-0.0702 -5.82292,1.32761 -7.60512,3.74699 l -55.82009,67.9505 -7.91379,8.3867 c -1.3128,1.4322 -4.17231,3.30401 -5.44901,9.5705 l -2.24169,12.4012 h 0.003 109.9996 110.00031 0.004 l -2.24158,-12.4012 z"
-          id="envelopeDown" />
-        <path
-          d="m 204.54748,-22.30946 c 0,0.7409 -2.23841,12.30429 -2.23841,12.30429 -1.27677,6.266 -4.13607,8.13823 -5.4483,9.57051 l -91.43008,96.8896 c -3.002,2.6494 -5.9188,4.812 -10.8832,4.812 -4.5165,0 -7.88031,-2.1626 -10.88241,-4.812 L -7.76479,-0.43466 c -1.31251,-1.43228 -4.17181,-3.30451 -5.44852,-9.57051 0,0 -2.23809,-11.56339 -2.23809,-12.30429 z"
-          id="envelopeUp" />
-      </svg>
+      <div class="envelopeBack">
+        <svg class="envelopeBackSVG" xmlns="http://www.w3.org/2000/svg" viewBox="-16 -18 220.42921 150.45351" >
+          <path
+            d="m 121.44578,48.06903 c -2.872,2.49622 -4.80727,5.89552 -5.48319,9.63511 l 2.1e-4,-0.0138 c 0.67599,3.73931 2.6095,7.13871 5.48259,9.6357 l -0.031,0.0223 63.82953,61.21181 0.0123,0.047 c 3.34641,3.6582 7.72089,6.22939 12.5519,7.378 l 6.73629,1.70561 2.1e-4,-160.00021 -6.73551,1.7061 v 0.0122 c -4.83161,1.14829 -9.20609,3.72039 -12.5536,7.37799 l -0.0479,0.0109 -63.82889,61.21122 0.0675,0.0601 z"
+            id="envelopeRight" />
+          <path
+            d="m 67.64378,48.06903 c 2.87161,2.49622 4.8073,5.89552 5.4828,9.63511 v -0.0138 c -0.6762,3.73931 -2.6095,7.13871 -5.4828,9.6357 l 0.0314,0.0223 -63.82999,61.21181 -0.012,0.047 c -3.34631,3.6582 -7.7209,6.22939 -12.5518,7.378 l -6.73618,1.70561 -3.6e-4,-160.00021 6.73552,1.7061 3.5e-4,0.0122 c 4.83161,1.14829 9.2057,3.72039 12.55321,7.37799 l 0.0481,0.0109 63.82911,61.21122 -0.0673,0.0601 z"
+            id="envelopeLeft" />
+          <path
+            d="m 202.3096,125.28944 c -1.2767,-6.26649 -4.13632,-8.1383 -5.44862,-9.5705 l -8.04478,-8.5252 -55.7597,-67.812 c -1.7847,-2.41938 -4.6199,-3.81741 -7.60691,-3.74699 H 63.57481 c -2.9863,-0.0702 -5.82292,1.32761 -7.60512,3.74699 l -55.82009,67.9505 -7.91379,8.3867 c -1.3128,1.4322 -4.17231,3.30401 -5.44901,9.5705 l -2.24169,12.4012 h 0.003 109.9996 110.00031 0.004 l -2.24158,-12.4012 z"
+            id="envelopeDown" />
+        </svg>
+      </div>
+      <div class="envelopeBackUp">
+        <svg class="envelopeBackSVG" xmlns="http://www.w3.org/2000/svg" viewBox="-16 -18 220.42921 150.45351" >  
+          <path
+            d="m 204.54748,-22.30946 c 0,0.7409 -2.23841,12.30429 -2.23841,12.30429 -1.27677,6.266 -4.13607,8.13823 -5.4483,9.57051 l -91.43008,96.8896 c -3.002,2.6494 -5.9188,4.812 -10.8832,4.812 -4.5165,0 -7.88031,-2.1626 -10.88241,-4.812 L -7.76479,-0.43466 c -1.31251,-1.43228 -4.17181,-3.30451 -5.44852,-9.57051 0,0 -2.23809,-11.56339 -2.23809,-12.30429 z"
+            id="envelopeUp" />
+        </svg>
+      </div>
       <div class="boxLetter"></div>
     </div>
     <h4 class="textScene1" id="arrum21">
