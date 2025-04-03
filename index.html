@@ -36,7 +36,7 @@
 
 body{
   font-family:'Satisfy', Verdana, Geneva, Tahoma, sans-serif ;    
-  background-color: rgb(245, 245, 255);
+  background-color: rgb(255, 245, 224);
   min-height:100vh ;
   width: 100vw;
   margin: 0px;
@@ -58,7 +58,7 @@ body{
   left:0;
   top:0;
   z-index: 2;
-  background-color: pink;
+  background-color: rgb(255, 245, 224);
 }
 
 /* pengaturan tampilan awal */
@@ -73,11 +73,10 @@ body{
   left:0;
   perspective-origin:  var(--mid-width) var(--mid-height);
 }
-
-
 .main.visible{
   opacity: 1;
   visibility: visible;
+  background: transparent;
 }
 
 /* Pengaturan Loading Word */
@@ -85,64 +84,313 @@ body{
   position: relative;
   font-size: 1rem;
   width: 5rem ;
-  left: 46%;
-  top: 50%;
-  animation: 2s ease alternate infinite loading;
-  overflow: hidden;
+  left: 43%;
+  top: 35%;
+  color: rgb(160, 75, 14);
+  text-shadow: 0px 0px 10px rgb(0, 0, 0, 0.5);
+}
+
+.loadingBit1{
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background-color: rgba(128, 60, 11, 0.575);
+  border-radius: 50%;
+  left: 30%;
+  top: 40%;
+  }
+
+.loadingBit2{
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background-color: rgb(160, 75, 14);
+  border-radius: 50%;
+  left: 30%;
+  top: 40%;
+  animation: loading 1s ease-in-out infinite alternate;
+  box-shadow: 0px 1px 5px rgb(78, 36, 7,0.7);
 }
 
 @keyframes loading {
   to{
-    width:0px
-  }}
+    left:70%  }}
 
-/* Pengaturan display door di awal */
-.door{
+/* pengaturan swipe up */
+.swipeUp {
   position: absolute;
-  background-color: pink;
-  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: grey;
+  background-color: rgba(173, 173, 173, 0.207) ;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 2;
+  visibility: hidden;
+}
+.scene0 .swipeUp{
+  animation: fadeInOut 10s ease-in-out forwards;
+  visibility: visible;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20%{ opacity: 1; }
+  40% { opacity: 0; }
+  60%{ opacity: 0; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.swipeUp div {
+  width: 80px;
+  height: 80px;
+  background-color: transparent;
+  border: 2px solid ;
+  border-bottom: grey;
+  border-left: grey;
+  margin: 2px;
+  animation: swipeUp 0.5s alternate infinite ease-in-out;
   opacity: 0;
 }
-div.door {
-  width: 50vw;
-  height: 100vh;
-  transition: 1.5s transform, 1.3s 0.2s opacity ;
+
+.swipeUp div:nth-child(1) { animation-delay: 0.4s; }
+.swipeUp div:nth-child(2) { animation-delay: 0.2s; }
+.swipeUp div:nth-child(3) { animation-delay: 0s; }
+
+@keyframes swipeUp {
+  0% { transform: rotate(-45deg) ; opacity: 0; }
+  50% { transform: rotate(-45deg) ; opacity: 0.5; }
+  100% { transform: rotate(-45deg) ; opacity: 1; }
 }
-.door#right{
-  transform-origin: right;
-  left: 50vw;
+
+/* Pengaturan Main scene0 */
+.envelope{
+  position: absolute;
+  width: 70vw;
+  height: 30vh;
+  top: 32vh;
+  left: 15vw; 
+  transform-style: preserve-3d;
+  background: transparent;
 }
-.door#left{
-  transform-origin: left;
-}
-h1.door , h2.door{
-  position: relative;
+
+.envelopeFront{
+  position: absolute;
+  width: 70vw;
+  height: 30vh;
+  border: 1px solid black;
   display: flex;
-  justify-self: center;
-  transform: translateY(42vh);
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+  background-color: rgb(77, 44, 29);
+  transform: translateZ(2px);
+ }
+
+.envelopeBack{
+  position: absolute;
+  fill: rgb(77, 44, 29);
+  stroke: black;
+  stroke-width: 1px;
+  transform: rotateY(180deg);
+  width: 70vw;
+  height: 190.45px;
+  max-width: 100%; /* Agar tidak melebihi lebar parent */
+  max-height: 100%; /* Agar tidak melebihi tinggi parent */
+  display: block; /* Menghindari extra space */
+  margin: auto; /* Pusatkan SVG */
+  object-fit: contain; /* Pastikan tetap proporsional */
+  backface-visibility: hidden;
+  filter:drop-shadow( 0px 5px 15px rgba(0, 0, 0, 0.5));
+  overflow: visible;
   background-color: transparent;
-  transition: 1.3s .2s opacity, 1.3s .1s scale;
 }
-h1.door{
-  font-size: 1.7rem;
+
+.envelopeFront h2{
+  position: absolute;
+  font-size: 2rem;
+  color: rgb(211, 142, 15);
+  text-shadow: 0px 0px 10px rgba(255, 217, 0, 0.411);
+  z-index: 2;
 }
-h2.door{
-  font-size: 1.5rem;
+
+.textScene0{
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s linear 0.5s;
 }
+
+/* Setting Scene0 untuk Text */
+.scene0 .textScene0{
+  visibility: visible;
+  opacity: 1;
+}
+#undangan, #pernikahan{
+  position: absolute;
+  width: 80vw;
+  letter-spacing: 0.5rem;
+  top: 14vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:2rem;
+  color: rgb(160, 75, 14);
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+#pernikahan{
+  letter-spacing: 0.2rem;
+  font-size: 1rem;
+  top: 22vh;
+}
+#nama{
+  position: absolute;
+  top: 75vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:1.5rem;
+  color: rgb(160, 75, 14);
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border-bottom: 1px solid rgb(114, 54, 11);
+}
+h3{
+  position: absolute;
+  top: 65vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:1.1rem;
+  color: rgb(160, 75, 14);
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* setting Scene 1 */
+
+@keyframes toScene1 {
+  10%{transform: rotateY(-40deg);}
+  70%{transform: rotateY(190deg);}
+  80%{transform: rotateY(180deg);top:32vh}
+  100%{transform: rotateY(180deg);top:50vh}
+}
+@keyframes toScene0 {
+  0%{transform: rotateY(180deg);top:50vh}
+  40%{transform: rotateY(180deg);top:32vh}
+  50%{transform: rotateY(190deg);}
+  90%{transform: rotateY(-15deg);}
+  100%{transform: rotateY(0deg);}
+}
+.scene1up .envelope{
+  animation: toScene1 2.5s ease-out forwards;
+}
+
+.scene0down .envelope{
+  animation: toScene0 3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {opacity:0;visibility: hidden;}
+  to{opacity: 1;visibility: visible;}
+}
+@keyframes fadeOut {
+  from{opacity: 1;visibility: visible;}
+  to{opacity: 0;visibility: hidden;}
+}
+
+.textScene1{
+  position: absolute;
+  top: 15vh;
+  left: 50%;
+  width: 80vw;
+  transform: translateX(-50%);
+  font-size: 0.8em;
+  color: rgb(160, 75, 14);
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  line-height: 1.8em;
+  opacity: 0;
+}
+#translation{
+  top: 25vh;
+  font-size: 0.7em;
+  line-height: 1em;
+}
+.scene1up .textScene1,.scene1down .textScene1{
+  animation: fadeIn 2s linear forwards 2.5s;
+}
+img.textScene1{
+  top: 39.5vh;
+  width: 50vw;
+}
+img#img2{
+  top: 40vh;
+  width: 90vw;
+  opacity: 0.1;
+  z-index: -4;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.scene0down .textScene1{
+  animation: fadeOut .5s linear forwards ;
+}
+
+/* Pengaturan Scene2 */
+
+
+.scene2up .envelope{
+  transform: rotateY(180deg);
+  top:50vh ;
+}
+.scene2up #envelopeUp{
+  animation: openUp 1s ease-in-out forwards;
+  transform-origin: 0px -23px;
+}
+
+@keyframes openUp {
+  to {transform: rotateX(180deg);}
+}
+
+.boxLetter{
+  position: absolute;
+  transform: rotateY(180deg);
+  width: 50vw;
+  height: 20vh;
+  max-width: 100%; /* Agar tidak melebihi lebar parent */
+  max-height: 100%; /* Agar tidak melebihi tinggi parent */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+  overflow: visible;
+  background-color: rgb(255, 245, 224);
+  transform: translate3d(10vw, 5px, 1px);
+}
+
+.scene2up .boxLetter{
+  animation: gotBigger 10s linear forwards 1s;
+}
+@keyframes gotBigger {
+  0%{transform: translate3d(10vw, 5px, 1px);}
+  30%{transform: translate3d(10vw, -150px, 1px);}
+  95%{transform: translate3d(10vw, -90px, -501px);}
+  100%{transform: translate3d(10vw, -30px, -501px);visibility: hidden;}
+}
+/* Pengaturan Scene3 */
+
+
+
+
 
 
 /* Pengaturan awal semua Item */
-.openingWord1{
-  position: absolute;
-  margin: 0px;
-  font-size: .5rem;
-  width: 20vw;
-  height: .6rem;
-  overflow: hidden;
-  transform: translate3d(0vw, 0vh, 1px)
-  }
 
-.man{
+
+/* .man{
   height: var(--man-height);
   position: absolute;
   transform: translate3d(calc(var(--xman-center) - 20vw), calc(var(--yman-center) + 28vh) , 1px); 
@@ -166,26 +414,9 @@ h2.door{
   position: absolute;
   z-index: -2;
   transform: translate3d(0vw,  -30vh , 0px);
-}
-
-/* -----okee scene 1-------- */
-.scene0 .door{opacity: 1}
-.scene1 div.door#left{
-  transform: rotateY(-100deg);
-  opacity: 0;
-}
-.scene1 div.door#right{
-  transform: rotateY(100deg);
-  opacity: 0;
-}
-.scene1 h1.door, .scene1 h2.door{
-  opacity : 0;
-  scale : 1.1;
-}
+} */
 
 
-
-/* -----scene 2-------- */
 
 
 
@@ -245,6 +476,43 @@ update jam 00:10
 upadate 26 jan 2025 15.59
 -kuganti scroll menjadi triger, gak menjadi patokan utama pergerakan animasi
 -tugas selanjutnya untuk membuat animasi dengan CSS biar lebih mudah 
+
+update 30 Mar 2025 16.16
+-Target scrollPosition sudah bisa negatif, jadinya aman untuk scrol atas scrol bawah, tetap bisa pindah scene
+-saat ini aku mau coba untuk ngubah tampilan depan dulu, jadi seperti amplop undangan
+-animasi door akan aku hapus dan digantikan dengan amplop undangan
+
+update 30 Mar 2025 16.37
+-aku dah ngubah loading page jadi tema coklat
+
+update 2 april 2025 2.58
+-aku menambahkan parameter up & down di scene, jadi kita bisa mengatur animasi di css untuk naik atau turun 
+
+update 2 april 2025 11.45
+-animasi dah bisa, aku nambahkan 2 @keyframe jadinya
+
+update 2 april 2025 15.47
+-Sudah menambahkan animasi swipe up untuk pemberitahuan
+-sudah menambahkan gambar bunga di kertas undangan
+-saat ini mau setting tulisan undangan di scene0 dulu
+
+update 3 april 2025 04.42
+-mencoba menambahkan Ar-Rum 21
+
+update 3 april 2025 05.43
+-sudah ditambah Ar-Rum 21 dan artinya tapi untuk jenis Font belum dipilih
+-sudah ditambahkan bunga sikit jg,
+-lanjut mau bikin Animasi untuk buka Amplop
+
+update 3 april 2025 07.23
+-belum berhasil membuat animasi buka Amplop wkwkwkw
+
+update 3 april 2025 09.02
+-anmimasi untuk amplop sudah rampung.
+-sedang memikirkan transisi untuk ke scene3 nya gimana
+
+update 3 april 2025 14.34
+-sudah ku buat anak suratnya, tinggal animasinya
 */
 
   </style>
@@ -252,19 +520,52 @@ upadate 26 jan 2025 15.59
 
 <body>
   <div class="loadingPage">
-    <h1 class="loadingWord"> Loading... </h1>
+    <h1 class="loadingWord"> Loading</h1>
+    <div class="loadingBit1"></div>
+    <div class="loadingBit2"></div>
   </div>
   
-  <div class="main scene0" >
-    <div class="door" id="left"></div>
-    <div class="door" id="right"></div>
-    <h1 class="door"> Undangan Pernikahan Hilwa & Arief</h1>
-    <h2 class="door"> Kepada Yth: Fulan</h2>
-    <img src="man.png"  class="man">
-    <img src="woman.png"  id="woman">
-    <img src="pantai.png" id="pantai">
-    <img src="pantai2.png" id="background">
-    <h1 class="openingWord1"> The Wedding Of Hilwa & Arief </h1>
+  <div class="main scene2up" >
+    <div class="swipeUp">
+      <div></div>
+      <div></div>
+      <div></div>
+      <br><br>Swipe Up
+    </div>
+    <h1 class="textScene0"  id="undangan">Undangan</h1>
+    <h1 class="textScene0" id="pernikahan" >Pernikahan</h1>
+    <h3 class="textScene0">Kepada:</h3>
+    <h2 class="textScene0"><span id="nama"></span></h2>
+    <div class="envelope">
+      <div class="envelopeFront">
+        <h2>Hilwa &<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arief</h2>
+        <img src="flower1.png" style="scale: 0.3">
+      </div>
+      <svg class="envelopeBack" xmlns="http://www.w3.org/2000/svg" viewBox="-16 -18 220.42921 150.45351" >
+        <path
+          d="m 121.44578,48.06903 c -2.872,2.49622 -4.80727,5.89552 -5.48319,9.63511 l 2.1e-4,-0.0138 c 0.67599,3.73931 2.6095,7.13871 5.48259,9.6357 l -0.031,0.0223 63.82953,61.21181 0.0123,0.047 c 3.34641,3.6582 7.72089,6.22939 12.5519,7.378 l 6.73629,1.70561 2.1e-4,-160.00021 -6.73551,1.7061 v 0.0122 c -4.83161,1.14829 -9.20609,3.72039 -12.5536,7.37799 l -0.0479,0.0109 -63.82889,61.21122 0.0675,0.0601 z"
+          id="envelopeRight" />
+        <path
+          d="m 67.64378,48.06903 c 2.87161,2.49622 4.8073,5.89552 5.4828,9.63511 v -0.0138 c -0.6762,3.73931 -2.6095,7.13871 -5.4828,9.6357 l 0.0314,0.0223 -63.82999,61.21181 -0.012,0.047 c -3.34631,3.6582 -7.7209,6.22939 -12.5518,7.378 l -6.73618,1.70561 -3.6e-4,-160.00021 6.73552,1.7061 3.5e-4,0.0122 c 4.83161,1.14829 9.2057,3.72039 12.55321,7.37799 l 0.0481,0.0109 63.82911,61.21122 -0.0673,0.0601 z"
+          id="envelopeLeft" />
+        <path
+          d="m 202.3096,125.28944 c -1.2767,-6.26649 -4.13632,-8.1383 -5.44862,-9.5705 l -8.04478,-8.5252 -55.7597,-67.812 c -1.7847,-2.41938 -4.6199,-3.81741 -7.60691,-3.74699 H 63.57481 c -2.9863,-0.0702 -5.82292,1.32761 -7.60512,3.74699 l -55.82009,67.9505 -7.91379,8.3867 c -1.3128,1.4322 -4.17231,3.30401 -5.44901,9.5705 l -2.24169,12.4012 h 0.003 109.9996 110.00031 0.004 l -2.24158,-12.4012 z"
+          id="envelopeDown" />
+        <path
+          d="m 204.54748,-22.30946 c 0,0.7409 -2.23841,12.30429 -2.23841,12.30429 -1.27677,6.266 -4.13607,8.13823 -5.4483,9.57051 l -91.43008,96.8896 c -3.002,2.6494 -5.9188,4.812 -10.8832,4.812 -4.5165,0 -7.88031,-2.1626 -10.88241,-4.812 L -7.76479,-0.43466 c -1.31251,-1.43228 -4.17181,-3.30451 -5.44852,-9.57051 0,0 -2.23809,-11.56339 -2.23809,-12.30429 z"
+          id="envelopeUp" />
+      </svg>
+      <div class="boxLetter"></div>
+    </div>
+    <h4 class="textScene1" id="arrum21">
+     وَمِنْ اٰيٰتِهٖۤ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَا جًا لِّتَسْكُنُوْۤا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗ اِنَّ فِيْ ذٰلِكَ لَاٰ يٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ   
+    </h4>
+    <h4 class="textScene1" id="translation">
+      Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+      (QS. Ar-Rum 30: Ayat 21)
+    </h4>
+    <img class="textScene1" src="flower2.png">
+    <img id="img2" src="flower2.png">
   </div>
  
   
@@ -274,6 +575,8 @@ upadate 26 jan 2025 15.59
   let scrollPosition = 0; // Posisi scroll virtual
   let scrollDirrection = 0;
   let sceneNumber = 0;
+  let sceneBefore = 0;
+  let sceneStatus ;
   let targetScrollPosition = 0; // Posisi scroll tujuan
   let startY = 0; // Posisi awal sentuhan pada layar
   const main = document.querySelector('.main');
@@ -281,24 +584,37 @@ upadate 26 jan 2025 15.59
 
   // Fungsi untuk memperbarui animasi
   function updateAnimation() {
+    //untuk memberitahu animasi maju atau mundur
+    sceneBefore = sceneNumber;
+
     // untuk membuat perubahan nomor scene
-   
+    
+    // Hitung posisi scroll saat ini
     scrollDirrection = (targetScrollPosition - scrollPosition);
     scrollPosition = targetScrollPosition;
     
-    if(scrollDirrection>=10){
+    if(scrollDirrection>=5){
       sceneNumber+=1;
     }
-    else if(scrollDirrection<=-10){
+    else if(scrollDirrection<=-5){
       sceneNumber-=1;
       sceneNumber = Math.max(sceneNumber,0);
     }
     console.log(targetScrollPosition, scrollPosition, scrollDirrection, sceneNumber);
     // Log posisi scroll ke console
-      
-    main.className = main.className.replace(/scene\d+/g, '');
-    main.classList.add(`scene${sceneNumber}`);
-    
+    if(sceneNumber > sceneBefore){
+      sceneStatus = 'up';
+    }
+    else if(sceneNumber < sceneBefore){
+      sceneStatus = 'down';
+    }
+    main.className = main.className.replace(/scene\d+\w*/g, ''); // Menghapus class scene sebelumnya
+    main.classList.add(`scene${sceneNumber}${sceneStatus}`);
+
+    // Menghapus class scene sebelumnya dan menambahkan class scene baru
+    // menambahkan class untuk indikator animasi maju atau mundur
+   
+   
   }
 
     // Event untuk desktop (mouse scroll)
@@ -318,7 +634,7 @@ upadate 26 jan 2025 15.59
       const currentY = event.touches[0].clientY; // Posisi sentuhan saat ini
       const deltaY = startY - currentY; // Hitung perubahan posisi
       targetScrollPosition += deltaY/20; // Tambah ke posisi tujuan
-      targetScrollPosition = Math.max(0, targetScrollPosition); // Hindari nilai negatif
+      //targetScrollPosition = Math.max(0, targetScrollPosition); // Hindari nilai negatif
       startY = currentY; // Update posisi sentuhan
       setTimeout(()=>{updateAnimation();},200); // Mulai animasi
     });   
@@ -332,6 +648,17 @@ upadate 26 jan 2025 15.59
       main.classList.add('visible')
       scrollPosition = 0;
     })
+
+     // Ambil parameter dari URL
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get("nama");
+
+    // Jika ada nilai, tampilkan di halaman
+    if (nama) {
+      document.getElementById("nama").textContent = nama;
+    } else {
+      document.getElementById("nama").textContent = "Guest";
+    }
 </script>
 
 
