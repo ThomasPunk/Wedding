@@ -46,7 +46,8 @@ body{
 /* menyembunyikan loading Page saat selesai */
 .loadingPage.hidden{
   opacity: 0;
-  visibility: hidden;
+  display: none;
+
 }
 
 /* pengaturan loadig Page */
@@ -70,11 +71,10 @@ body{
   position: absolute;
   perspective: 500px;
   left:0;
-  perspective-origin:  var(--mid-width) var(--mid-height);
+  perspective-origin:  50vw 50vh;
 }
 .main.visible{
   opacity: 1;
-  visibility: visible;
   background: transparent;
 }
 
@@ -131,7 +131,6 @@ body{
   border-radius: 10px;
   overflow: hidden;
   z-index: 2;
-  visibility: hidden;
 }
 .scene0 .swipeUp{
   animation: fadeInOut 10s ease-in-out forwards;
@@ -143,7 +142,7 @@ body{
   40% { opacity: 0; }
   60%{ opacity: 0; }
   80% { opacity: 1; }
-  100% { opacity: 0; }
+  100% { opacity: 0; display: none;}
 }
 
 .swipeUp div {
@@ -177,7 +176,6 @@ body{
   left: 15vw; 
   transform-style: preserve-3d;
   background: transparent;
-  visibility: hidden;
   opacity: 0;
 }
 
@@ -232,7 +230,7 @@ body{
   transform: rotateY(180deg);
   top:50vh ;
 }
-.scene0 .envelope, .scene0down .envelope, .scene1up .envelope, .scene1down .envelope, .scene2up .envelope{
+.scene0 .envelope, .scene0down .envelope, .scene1up .envelope, .scene1down .envelope, .scene2up .envelope, .scene0undefined .envelope{
   visibility: visible;
   opacity: 1;
 }
@@ -256,7 +254,6 @@ body{
 
 .textScene0{
   opacity: 0;
-  visibility: hidden;
   transition: opacity 0.5s ease-in-out, visibility 0.5s linear 0.5s;
 }
 
@@ -328,7 +325,7 @@ h3{
 }
 
 @keyframes fadeIn {
-  from {opacity:0;visibility: hidden;}
+  from {opacity:0;}
   to{opacity: 1;visibility: visible;}
 }
 @keyframes fadeOut {
@@ -368,7 +365,6 @@ img#img2{
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  visibility: hidden;
   opacity: 0;
 }
 .scene0 #img2, .scene0down #img2, .scene1up #img2, .scene1down #img2{
@@ -465,6 +461,7 @@ img#img2{
       stroke-dashoffset: 0;
       fill-opacity: 0.3;
       stroke-width: 0;
+      visibility: visible;
   }
 }
 
@@ -485,7 +482,6 @@ img#img2{
   text-align: center;
   line-height: 1.8em;
   opacity: 0;
-  visibility: hidden;
 }
 h1.textScene2{
   top: 15vh;
@@ -528,7 +524,6 @@ h1.textScene2{
   line-height: 1.1em;
   border-left: 1px solid rgb(114, 54, 11);
   padding-left: 5px;
-  visibility: hidden;
   opacity: 0;
 }
 h1.textScene3{
@@ -570,6 +565,7 @@ animation: fadeIn 1.5s ease-in-out forwards;
       stroke-dashoffset: 0;
       fill-opacity: 0.5;
       stroke-width: 0;
+      visibility: visible;
   }
 }
 
@@ -605,7 +601,6 @@ animation: fadeIn 1.5s ease-in-out forwards;
   line-height: 1.1em;
   border-right: 1px solid rgb(114, 54, 11);
   padding-right: 5px;
-  visibility: hidden;
   opacity: 0;
 }
 h1.textScene4{
@@ -647,12 +642,84 @@ animation: fadeIn 1.5s ease-in-out forwards;
       stroke-dashoffset: 0;
       fill-opacity: 0.4;
       stroke-width: 0;
+      visibility: visible;
   }
 }
 
 /* setting untuk scene5 - Lokasi, Tanggal, akad dan */
 
+.scene5up .textScene5, .scene5down .textScene5{
+  animation: fadeIn 2s ease-in-out forwards;
+}
 
+.textScene5{
+  position: absolute;
+  left: 50%;
+  width: 80vw;
+  transform: translateX(-50%);
+  font-size: 0.9em;
+  color: black;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  line-height: 1.8em;
+  opacity: 0;
+}
+h1.textScene5{
+  font-size: 1.5em;
+}
+
+#openingScene5{
+  top: 10vh;
+  font-size: .8em;
+}
+#akad{
+  top: 17vh;
+}
+#descriptionAkad{
+  top:24vh;
+}
+#resepsi{
+  top: 47vh;
+}
+#descriptionResepsi{
+  top: 54vh;
+}
+
+.imgScene5{
+  position: absolute;
+  cursor: pointer;
+  width: 15px;
+  height: auto;
+}
+
+.scene5up .imgScene5{
+  animation: fadeIn 2s ease-in-out forwards;
+}
+#locationAkad{
+  top: 26.7vh;
+  left: 85vw;
+}
+#locationResepsi{
+  top: 56.8vh;
+  left: 85vw;
+}
+.imgScene5#backdrop{
+  bottom: -8vh;
+  left: 0vw;
+  width: 100vw;
+  height: auto;
+  opacity: 0.5;
+}
+.scene5up #backdrop{
+  animation: dance 6s linear alternate infinite;
+}
+
+@keyframes dance {
+  0%{transform: translate3d(-5px, 0px, 0px);visibility: visible;}
+  100%{transform: translate3d(5px, 0px, 5px);visibility: visible;}
+}
+
+/* Setting untuk scene 6 */
 
 
 
@@ -767,7 +834,7 @@ update 4 april 2025 17.06
     <div class="loadingBit2"></div>
   </div>
   
-  <div class="main scene5up" >
+  <div class="main scene0" >
     <div class="swipeUp">
       <div></div>
       <div></div>
@@ -882,24 +949,27 @@ update 4 april 2025 17.06
     </div>
 
     <!-- Scene 5 Lokasi, Tanggal dan waktu akad dan resepsi -->
-    <p class="textScene5"> Insya Allah akan diselenggarakan pada : </p>
-    <h1 class="textScene5">AKAD NIKAH</h1>
-    <p class="textScene5">
+    <p class="textScene5" id="openingScene5"> Insya Allah akan diselenggarakan pada : </p>
+    <h1 class="textScene5" id="akad">AKAD NIKAH</h1>
+    <p class="textScene5" id="descriptionAkad">
       Lokasi : Masjid Raya Baiturrahman. Banda Aceh<br>
       Tanggal : 24 Mei 2025<br>
       Waktu : 10.00 WIB-Selesai
     </p>
-    <h1 class="textScene5">RESEPSI</h1>
-    <p class="textScene5">
+    <h1 class="textScene5" id="resepsi">RESEPSI</h1>
+    <p class="textScene5" id="descriptionResepsi">
       Lokasi : Beulangong Raja Resto & Garden <br>
       Tanggal : 25 Mei 2025<br>
       Waktu : 11.00 WIB-Selesai
     </p>
-    <img class="img1Scene5" src="location.png"  alt="location Akad" onclick="window.location.href='https://maps.app.goo.gl/A3XjUeCxhniWvB5o7';" style="cursor: pointer;" />
-    <img class="img2Scene5" src="location.png"  alt="location Resepsi" onclick="window.location.href='https://maps.app.goo.gl/VW7PoVRsj5vcFPm78';" style="cursor: pointer;" />
-
+    <img class="imgScene5" src="location.png" id="locationAkad" alt="location Akad" onclick="window.open('https://maps.app.goo.gl/A3XjUeCxhniWvB5o7','_blank');" />
+    <img class="imgScene5" src="location.png" id="locationResepsi" alt="location Resepsi" onclick="window.open('https://maps.app.goo.gl/VW7PoVRsj5vcFPm78','_blank');" />
+    <img class="imgScene5" src="flower5.png" id="backdrop" />
 
     <!-- Scene 6 RSVP ucapan kepada Kedua Mempelai -->    
+
+
+
 
 
   </div>
