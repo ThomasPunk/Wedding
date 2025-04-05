@@ -558,7 +558,7 @@ animation: fadeIn 1.5s ease-in-out forwards;
 }
 
 .scene3up .femaleSVG{
-  animation: drawFemale 5s ease-in-out forwards 2s;
+  animation: drawFemale 5s ease-in-out forwards 0.5s;
 }
 
 @keyframes drawFemale {
@@ -635,7 +635,7 @@ animation: fadeIn 1.5s ease-in-out forwards;
 }
 
 .scene4up .maleSVG{
-  animation: drawMale 5s ease-in-out forwards 2s;
+  animation: drawMale 5s ease-in-out forwards 0.5s;
 }
 
 @keyframes drawMale{
@@ -660,7 +660,7 @@ animation: fadeIn 1.5s ease-in-out forwards;
 /* setting untuk scene5 - Lokasi, Tanggal, akad dan */
 
 .scene5up .textScene5, .scene5down .textScene5{
-  animation: fadeIn 2s ease-in-out forwards 5s;
+  animation: fadeIn 2s ease-in-out forwards 2s;
 }
 
 .textScene5{
@@ -714,16 +714,17 @@ h1.textScene5{
 }
 
 .scene5up .imgScene5{
-  animation: fadeIn 2s ease-in-out forwards 5s;
+  animation: fadeIn 2s ease-in-out forwards 2s;
 }
 #locationAkad{
-  top: 61vh;
+  top: 54vh;
   left: 8vw;
   scale: 3;
   filter:grayscale(100%); 
+  z-index: 2;
 }
 #locationResepsi{
-  top: 86vh;
+  top: 80vh;
   right: 8vw;
   scale: 3;
   filter:grayscale(100%);
@@ -1028,7 +1029,7 @@ update 5 april 2025 23.47
     </div>
     <h1 class="textScene2">Our Special Day</h1>
     <p class="textScene2">
-      Asslamau'alaikum Warahmatullahi Wabarakatuh<br>
+      Assalamu'alaikum Warahmatullahi Wabarakatuh<br>
       Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i serta kerabat sekalian untuk menghadiri acara pernikahan putra-putri kami
     </p>
 
@@ -1125,9 +1126,9 @@ update 5 april 2025 23.47
 
     <div class="textScene6" id="thankYouMsg" ></div>
     <iframe name="hiddenConfirm" style="display:none;"></iframe>
-
+   
   </div>
-
+  <audio id="tomat" src="On the Night Like This.m4a" type="audio/mp4"></audio>
 <script>
 
   //-----------Bagian logika pindah scene-------------
@@ -1173,7 +1174,7 @@ update 5 april 2025 23.47
 
     // Menghapus class scene sebelumnya dan menambahkan class scene baru
     // menambahkan class untuk indikator animasi maju atau mundur
-   
+    playAudio();
    
   }
 
@@ -1228,6 +1229,18 @@ update 5 april 2025 23.47
     }, 300);
 
     return true; // Tetap kirim form ke Google Form
+    }
+
+
+    // Fungsi untuk memutar audio
+    const audio = document.getElementById('tomat');
+
+    function playAudio() {
+      if (sceneNumber >= 2) {
+        audio.play().catch(err => console.log("Gagal play:", err));
+      } else {
+        audio.pause();
+      }
     }
 </script>
 
