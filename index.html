@@ -183,18 +183,18 @@ body{
   left: 15vw; 
   transform-style: preserve-3d;
   background: transparent;
-  opacity: 0;
   Font-family:'Satisfy', Verdana, Geneva, Tahoma, sans-serif ; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .envelopeFront{
   position: absolute;
-  width: 70vw;
-  height: 30vh;
+  width: 280px;
+  height: 210px;
   border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   backface-visibility: hidden;
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
@@ -205,7 +205,7 @@ body{
 .envelopeBack{
   position: absolute;
   width: 70vw;
-  height: 190.45px;
+  height: 210px;
   transform: rotateY(180deg)translate3d(-1.5px, 5px, -.1px);
 }
 
@@ -215,7 +215,7 @@ body{
   stroke: black;
   stroke-width: 1px;
   width: 70vw;
-  height: 190.45px;
+  height: 180px;
   max-width: 100%; /* Agar tidak melebihi lebar parent */
   max-height: 100%; /* Agar tidak melebihi tinggi parent */
   display: block; /* Menghindari extra space */
@@ -230,7 +230,7 @@ body{
 .envelopeBackUp{
   position: absolute;
   width: 70vw;
-  height: 190.45px;
+  height: 210px;
   transform-origin: 0px 5px;
   transform: translate(0px,5px);
 }
@@ -238,7 +238,7 @@ body{
   transform: rotateY(180deg);
   top:50vh ;
 }
-.scene0 .envelope, .scene0down .envelope, .scene1up .envelope, .scene1down .envelope, .scene2up .envelope, .scene0undefined .envelope{
+.scene0 .envelope, .scene0down .envelope, .scene1up .envelope, .scene2up .envelope, .scene0undefined .envelope{
   visibility: visible;
   opacity: 1;
 }
@@ -258,8 +258,12 @@ body{
   font-style: normal;
   font-size: 2.4rem;
   color: rgb(211, 142, 15);
-  text-shadow: 0px 0px 10px rgba(255, 217, 0, 0.411);
+  /* text-shadow: 0px 0px 30px rgba(0, 238, 255, 0.411); */
   z-index: 2;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 35%;
+
 }
 
 .textScene0{
@@ -362,12 +366,12 @@ h3{
   font-size: 0.7em;
   line-height: 1em;
 }
-.scene1up .textScene1,.scene1down .textScene1{
+.scene1up .textScene1{
   animation: fadeIn 2s linear forwards 2.5s;
 }
 img.textScene1{
   top: 39.5vh;
-  width: 50vw;
+  width: 220px;
 }
 img#img2{
   top: 40vh;
@@ -378,7 +382,7 @@ img#img2{
   transform: translateX(-50%);
   opacity: 0;
 }
-.scene0 #img2, .scene0down #img2, .scene1up #img2, .scene1down #img2{
+.scene0 #img2, .scene0down #img2, .scene1up #img2{
   visibility: visible;
   opacity: 0.1;
 }
@@ -387,29 +391,92 @@ img#img2{
   animation: fadeOut .5s linear forwards ;
 }
 
+/* Pengaturan Scene1down */
+
+.scene1down .boxLetter{
+  animation: gotSmaller 2s linear forwards 2s;
+}
+@keyframes gotSmaller {
+  0%{transform: translate3d(0px, -150px, -501px);visibility: visible;}
+  5%{transform: translate3d(0px, -150px, -501px);}
+  70%{transform: translate3d(0px, -150px, .2px);}
+  100%{transform: translate3d(0px, 5px, .2px);}
+}
+
+.scene1down .envelope{
+  top:50vh;
+  transform: rotateY(180deg);
+  visibility: hidden;
+}
+.scene1down .envelopeBackUp{
+  transform: rotateX(-180deg) translate3d(0px,5px,-.5px);
+}
+.scene1down .envelopeBack{
+  animation: fadeIn .3s linear forwards 2.1s;
+}
+.scene1down .textScene1{
+  animation: fadeIn 2s linear forwards 4s;
+}
+.scene1down .envelopeBackUp{
+  animation: closeUp 2.5s ease-in forwards 2.1s ;
+}
+
+@keyframes closeUp {
+  0% {opacity: 0;
+    visibility: hidden;
+    transform: rotateX(-180deg) translate3d(0px,5px,-.5px);}
+  5% {opacity: 1;
+    visibility: visible;
+    transform: rotateX(-180deg) translate3d(0px,5px,-.5px);}
+  75%  {opacity: 1;
+    visibility: visible;
+    transform: rotateX(-180deg) translate3d(0px,5px,-.5px);}
+  100%{opacity: 1;
+    visibility: visible;
+    transform: rotateX(0deg) translate3d(0px,5px,-.1px);}
+}
+
+.scene1down #img2{
+  animation: fadeOutBackdrop 1.5s linear forwards 2.1s;
+}
+@keyframes fadeOutBackdrop {
+  0%{opacity: 0;visibility: hidden;}
+  5%{opacity: 0.1;visibility: visible;}
+  100%{opacity: 0.1;visibility: visible;}
+}
+
+
+.scene1down .textScene2, .scene1down .backdrop{
+  animation: fadeOut 1.8s linear forwards; 
+}
+
+
+
+
+
 /* Pengaturan Scene2 */
 
 .boxLetter{
   position: absolute;
   transform: rotateY(180deg);
-  width: 50vw;
-  height: 20vh;
+  width: 180px;
+  height: 160px;
   max-width: 100%; /* Agar tidak melebihi lebar parent */
   max-height: 100%; /* Agar tidak melebihi tinggi parent */
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
   overflow: visible;
   background-color: rgb(255, 245, 224);
-  transform: translate3d(10vw, 10px, .2px);
+  transform: translate3d(0px, 0px, .2px);
 }
 
 .scene2up .boxLetter{
-  animation: gotBigger 2s linear forwards 1.2s;
+  animation: gotBigger 2s ease-in-out forwards 1.2s;
 }
 @keyframes gotBigger {
-  0%{transform: translate3d(10vw, 5px, .2px);}
-  30%{transform: translate3d(10vw, -150px, .2px);}
-  95%{transform: translate3d(10vw, -90px, -501px);}
-  100%{transform: translate3d(10vw, -30px, -501px);visibility: hidden;}
+  0%{transform: translate3d(0px, 5px, .2px);}
+  30%{transform: translate3d(0px, -150px, .2px);}
+  95%{transform: translate3d(0px, -150px, -501px);}
+  100%{transform: translate3d(0px, -150px, -501px);visibility: hidden;}
 }
 
 .scene2up .textScene1{
@@ -974,7 +1041,7 @@ update 5 april 2025 23.47
       <div class="envelopeFront">
         <h2>Hilwa &
           <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arief</h2>
-        <img src="flower1.png" style="scale: 0.3">
+        <img src="flower1.png" style="scale: 0.3 ;position: absolute; top: -55%; left: -40%;" alt="flower1" class="flower1">
       </div>
       <div class="envelopeBack">
         <svg class="envelopeBackSVG" xmlns="http://www.w3.org/2000/svg" viewBox="-16 -18 220.42921 150.45351" >
@@ -1128,7 +1195,7 @@ update 5 april 2025 23.47
     <iframe name="hiddenConfirm" style="display:none;"></iframe>
    
   </div>
-  <audio id="tomat" src="On the Night Like This.m4a" type="audio/mp4"></audio>
+  <audio id="tomat" src="On the Night Like This.m4a" type="audio/mp4" loop></audio>
 <script>
 
   //-----------Bagian logika pindah scene-------------
@@ -1243,7 +1310,17 @@ update 5 april 2025 23.47
       }
     }
 </script>
-
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
+      document.documentElement.msRequestFullscreen();
+    }
+  });
+</script>
 
 
 </body>
