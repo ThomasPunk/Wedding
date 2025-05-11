@@ -23,7 +23,7 @@
       width: 100%;
       text-align: center;
     }
-    input[type="text"] {
+    input, select {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 1rem;
@@ -67,7 +67,13 @@
     <h2>Generator Teks Undangan</h2>
     <form id="inviteForm">
       <input type="text" id="nama" placeholder="Masukkan Nama Tamu" required />
-      <input type="text" id="namaPenginput" placeholder="Masukkan Namamu" required />
+      <input type="text" id="namaPenginput" placeholder="Masukkan Nama Penginput" required />
+      <select id="sebutan" required>
+        <option value="" disabled selected>Pilih Sebutan (Anak / Adik)</option>
+        <option value="Anak Kami" >Anak</option>
+        <option value="Adik Kami">Adik</option>
+        <option value="Kami">-</option>
+      </select>
       <button type="submit">Buat Undangan</button>
     </form>
     <div class="link-output" id="linkOutput" style="display:none;">
@@ -81,13 +87,14 @@
       e.preventDefault();
       const nama = document.getElementById('nama').value.trim();
       const namaPenginput = document.getElementById('namaPenginput').value.trim();
+      const sebutan = document.getElementById('sebutan').value.trim();
       if (!nama || !namaPenginput) return;
 
       const url = 'https://thomaspunk.github.io/Wed-Inv-H-A/?nama=' + encodeURIComponent(nama);
 
       const isi = `Assalamu'alaikum Warahmatullahi Wabarakatuh\n\n` +
         `Kepada Yth,\n${nama}\n\n` +
-        `Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara Pernikahan dan Resepsi Anak kami :\n\n` +
+        `Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara Pernikahan dan Resepsi ${sebutan}:\n\n` +
         `HILWA NADIA HELSRIYATNA\n &\nARIEF NUGRAHA\n\n` +
         `${url}\n\n` +
         `AKAD NIKAH (keluarga)\n` +
